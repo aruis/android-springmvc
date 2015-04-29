@@ -7,7 +7,6 @@ import android.os.Handler
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
-import android.widget.SimpleAdapter
 import com.aruis.android.androidhomework3.app.util.Consts
 import com.aruis.android.androidhomework3.app.util.Tool
 import org.json.JSONArray
@@ -41,47 +40,25 @@ public class MainActivity extends Activity {
             }
         })
 
-        new Thread(new Runnable() {
-            @Override
-            void run() {
-                URL url = new URL(Consts.url + "task/list");
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                try {
-                    BufferedReader inputStream = new BufferedReader(
-                            new InputStreamReader(urlConnection.getInputStream()));
+        Thread.start {
 
-                    String inputLine;
-                    StringBuffer response = new StringBuffer();
+            String json = new URL(Consts.url + "task/list").text
+            JSONArray jsonArray = new JSONArray(json)
+            List dataList = Tool.toList(jsonArray)
 
-                    while ((inputLine = inputStream.readLine()) != null) {
-                        response.append(inputLine);
-                    }
-                    inputStream.close();
+            MyAdapter asdp = new MyAdapter(getApplicationContext(),
+                    dataList, //数据源
+                    R.layout.list_item, //行布局文件
+                    ["name", "detail", "imgUrl"] as String[], //把MAP里面的key映射到ID中
+                    [R.id.mainTW, R.id.subTW, R.id.itemImageView] as int[]);
 
-                    String json = response.toString()
-                    JSONArray jsonArray = new JSONArray(json)
-                    List dataList = Tool.toList(jsonArray)
-
-                    SimpleAdapter asdp = new MyAdapter(getApplicationContext(),
-                            dataList, //数据源
-                            R.layout.list_item, //行布局文件
-                            ["name", "detail", "imgUrl"] as String[], //把MAP里面的key映射到ID中
-                            [R.id.mainTW, R.id.subTW, R.id.itemImageView] as int[]);
-
-                    handler.post(new Runnable() {
-                        @Override
-                        void run() {
-                            listView.setAdapter(asdp);
-                        }
-                    })
-
+            handler.post(new Runnable() {
+                @Override
+                void run() {
+                    listView.setAdapter(asdp);
                 }
-                finally {
-                    urlConnection.disconnect();
-                }
-            }
-        }).start()
-
+            })
+        }
 
     }
 
