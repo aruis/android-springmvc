@@ -15,7 +15,7 @@ import groovy.transform.CompileStatic
 @CompileStatic
 public class MainActivity extends Activity {
 
-    private static Handler handler = new Handler();
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
