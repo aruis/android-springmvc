@@ -36,7 +36,7 @@ import java.util.Map;
  * in the list. The Maps contain the data for each row. You also specify an XML file that
  * defines the views used to display the row, and a mapping from keys in the Map to specific
  * views.
- * <p/>
+ * <p>
  * Binding data to views occurs in two phases. First, if a
  * {@link android.widget.SimpleAdapter.ViewBinder} is available,
  * {@link ViewBinder#setViewValue(android.view.View, Object, String)}
@@ -231,7 +231,7 @@ public class MyAdapter extends BaseAdapter implements Filterable {
      * Called by bindView() to set the image for an ImageView but only if
      * there is no existing ViewBinder or if the existing ViewBinder cannot
      * handle binding to an ImageView.
-     * <p/>
+     * <p>
      * This method is called instead of {@link #setViewImage(ImageView, String)}
      * if the supplied data is an int or Integer.
      *
@@ -247,11 +247,11 @@ public class MyAdapter extends BaseAdapter implements Filterable {
      * Called by bindView() to set the image for an ImageView but only if
      * there is no existing ViewBinder or if the existing ViewBinder cannot
      * handle binding to an ImageView.
-     * <p/>
+     * <p>
      * By default, the value will be treated as an image resource. If the
      * value cannot be used as an image resource, the value is used as an
      * image Uri.
-     * <p/>
+     * <p>
      * This method is called instead of {@link #setViewImage(ImageView, int)}
      * if the supplied data is not an int or Integer.
      *
@@ -289,7 +289,7 @@ public class MyAdapter extends BaseAdapter implements Filterable {
     /**
      * This class can be used by external clients of SimpleAdapter to bind
      * values to views.
-     * <p/>
+     * <p>
      * You should use this class to bind values to views that are not
      * directly supported by SimpleAdapter or to change the way binding
      * occurs for views supported by SimpleAdapter.
@@ -301,7 +301,7 @@ public class MyAdapter extends BaseAdapter implements Filterable {
     public static interface ViewBinder {
         /**
          * Binds the specified data to the specified view.
-         * <p/>
+         * <p>
          * When binding is handled by this ViewBinder, this method must return true.
          * If this method returns false, SimpleAdapter will attempts to handle
          * the binding on its own.

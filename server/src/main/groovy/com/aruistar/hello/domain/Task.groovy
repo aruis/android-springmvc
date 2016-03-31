@@ -1,5 +1,4 @@
 package com.aruistar.hello.domain
-
 /**
  * Created by liurui on 15/4/27.
  */
